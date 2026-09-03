@@ -60,7 +60,7 @@ at the default 4× setting).
 
 ## Deployed link
 
-**[fill in your live URL here once deployed]**
+ https://anu-62anu.github.io/challenge/
 
 Deploying this needs no build step — it's already static. Easiest path
 since the source is already on GitHub: repo Settings → Pages → deploy from
