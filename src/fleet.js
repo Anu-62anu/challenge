@@ -9,10 +9,11 @@ export function latestByRobot(events) {
   }, new Map());
 }
 
+
 export function applyEvent(fleet, event) {
   const next = new Map(fleet);
   const previous = next.get(event.robot_id);
-  if (!previous || event.t >= previous.t) next.set(event.robot_id, event);
+  if (!previous || event.t >= previous.t) next.set(event.robot_id, { ...previous, ...event });
   return next;
 }
 
@@ -43,8 +44,8 @@ export function trendPoints(events) {
 export function createLiveEvent(previous, time) {
   const angle = (time / 11 + previous.robot_id.charCodeAt(1)) * 0.65;
   const speed = previous.status === 'idle' || previous.status === 'charging' ? 0.6 : 2.4;
-  const x = Math.max(8, Math.min(1015, previous.x + Math.cos(angle) * speed * 5));
-  const y = Math.max(8, Math.min(395, previous.y + Math.sin(angle) * speed * 5));
+  const x = Math.max(8, Math.min(890, previous.x + Math.cos(angle) * speed * 5));
+  const y = Math.max(8, Math.min(550, previous.y + Math.sin(angle) * speed * 5));
   const batteryDelta = previous.status === 'charging' ? 0.8 : -0.16;
   const battery = Math.max(0, Math.min(100, previous.battery + batteryDelta));
   let status = previous.status;
